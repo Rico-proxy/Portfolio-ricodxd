@@ -1,136 +1,114 @@
-import { AnimatedCircularProgressBar } from '../ui/animated-circular-progress-bar';
 import { Card, CardContent, CardDescription, CardTitle } from '../ui/card';
-import { ShineBorder } from '../ui/shine-border';
+
+type Skill = {
+  name: string;
+  level: number;
+  summary: string;
+  tools: string[];
+};
+
+const frontendSkills: Skill[] = [
+  {
+    name: 'React',
+    level: 92,
+    summary:
+      'Build reusable components, compose layouts, and manage complex UI state with hooks.',
+    tools: ['Hooks', 'React Router', 'Component Patterns'],
+  },
+  {
+    name: 'Tailwind CSS',
+    level: 90,
+    summary:
+      'Create responsive layouts quickly with utility-first styling and clean design systems.',
+    tools: ['Responsive UI', 'Design Tokens', 'Animations'],
+  },
+  {
+    name: 'Redux Toolkit',
+    level: 84,
+    summary:
+      'Handle global state for scalable apps with slices, async thunks, and predictable flow.',
+    tools: ['Slices', 'Async Thunks', 'Normalized State'],
+  },
+  {
+    name: 'State Management',
+    level: 86,
+    summary:
+      'Choose the right state strategy per feature using Context, local state, or global store.',
+    tools: ['Context API', 'Local State', 'Server State'],
+  },
+  {
+    name: 'TypeScript',
+    level: 83,
+    summary:
+      'Ship safer frontend code with strict typing, reusable interfaces, and clearer APIs.',
+    tools: ['Type Safety', 'Interfaces', 'Utility Types'],
+  },
+  {
+    name: 'Next.js',
+    level: 60,
+    summary:
+      'Build production-ready frontend experiences with routing, optimized assets, and SSR/SSG.',
+    tools: ['App Router', 'SSR/SSG', 'Performance'],
+  },
+];
 
 export const Skills = () => {
   return (
     <div className="py-20">
-      <div>
-        <div className="flex flex-row items-center justify-center gap-4 mx-auto max-md:hidden">
-          <div className="h-px w-16 border-t-2 border border-border"></div>
-          <h1 className="text-secondary text-2xl font-bold">My Experience</h1>
-          <div className="h-px w-16 border-t-2 border border-border"></div>
+      <div className="max-md:hidden flex flex-row justify-center items-center gap-4 mx-auto">
+        <div className="border border-border border-t-2 w-16 h-px"></div>
+        <h1 className="font-fredoka font-bold text-secondary text-2xl">
+          My Experience
+        </h1>
+        <div className="border border-border border-t-2 w-16 h-px"></div>
+      </div>
+
+      <div className="gap-8 grid grid-cols-1 md:grid-cols-2 px-8 xl:px-32 pt-14">
+        <div className="md:hidden flex flex-row justify-center items-center gap-4 mx-auto">
+          <div className="border border-border border-t-2 w-16 h-px"></div>
+          <h1 className="font-fredoka font-bold text-secondary text-2xl">
+            My Experience
+          </h1>
+          <div className="border border-border border-t-2 w-16 h-px"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 px-8 xl:px-32 pt-20">
-          <div className="flex flex-row items-center justify-center gap-4 mx-auto md:hidden">
-            <div className="h-px w-16 border-t-2 border border-border"></div>
-            <h1 className="text-secondary text-2xl font-bold">My Experience</h1>
-            <div className="h-px w-16 border-t-2 border border-border"></div>
-          </div>
-
-          <div className="flex justify-center px-8 pt-20  xl:max-w-lg ">
-            <Card className="border bg-card relative overflow-hidden">
-              <CardContent className="flex flex-col gap-2 p-6">
-                <CardTitle>
-                  <AnimatedCircularProgressBar
-                    value={70}
-                    gaugePrimaryColor="var(--green)"
-                    gaugeSecondaryColor="var(--mint-green)"
-                    className="size-13 text-xl text-card-foreground"
-                  />
+        {frontendSkills.map((skill) => (
+          <Card
+            key={skill.name}
+            className="bg-card/95 shadow-black/10 shadow-lg backdrop-blur-sm border-border">
+            <CardContent className="space-y-4 p-6">
+              <div className="flex justify-between items-center gap-3">
+                <CardTitle className="font-fredoka text-card-foreground text-2xl">
+                  {skill.name}
                 </CardTitle>
-                <CardDescription className="flex flex-col">
-                  <h1 className="text-card-foreground font-bold text-xl">Javascript</h1>
-                  <span className="text-card-foreground font-butter">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quia eum temporibus sapiente molestiae voluptatem quos.
+                <span className="font-semibold text-secondary text-sm">
+                  {skill.level}%
+                </span>
+              </div>
+
+              <div className="bg-muted rounded-full w-full h-2 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-secondary to-primary rounded-full h-full transition-all duration-700"
+                  style={{ width: `${skill.level}%` }}
+                />
+              </div>
+
+              <CardDescription className="font-butter text-card-foreground text-base">
+                {skill.summary}
+              </CardDescription>
+
+              <div className="flex flex-wrap gap-2">
+                {skill.tools.map((tool) => (
+                  <span
+                    key={`${skill.name}-${tool}`}
+                    className="bg-background/70 px-3 py-1 border border-border rounded-full font-semibold text-foreground text-xs">
+                    {tool}
                   </span>
-                </CardDescription>
-              </CardContent>
-
-              <ShineBorder
-                shineColor={['#000000', '#ffffff', '#000000']}
-                borderWidth={1}
-                duration={10}
-              />
-            </Card>
-          </div>
-
-          <div className="flex justify-center px-8 pt-20  xl:max-w-lg">
-            <Card className="border bg-card relative overflow-hidden">
-              <CardContent className="flex flex-col gap-2 p-6">
-                <CardTitle>
-                  <AnimatedCircularProgressBar
-                    value={70}
-                    gaugePrimaryColor="var(--green)"
-                    gaugeSecondaryColor="var(--mint-green)"
-                    className="size-13 text-xl text-card-foreground"
-                  />
-                </CardTitle>
-                <CardDescription className="flex flex-col">
-                  <h1 className="text-card-foreground font-bold text-xl">Javascript</h1>
-                  <span className="text-card-foreground font-butter">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quia eum temporibus sapiente molestiae voluptatem quos.
-                  </span>
-                </CardDescription>
-              </CardContent>
-
-              <ShineBorder
-                shineColor={['#000000', '#ffffff', '#000000']}
-                borderWidth={1}
-                duration={10}
-              />
-            </Card>
-          </div>
-
-          <div className="flex justify-center px-8 pt-20  xl:max-w-lg">
-            <Card className="border bg-card relative overflow-hidden">
-              <CardContent className="flex flex-col gap-2 p-6">
-                <CardTitle>
-                  <AnimatedCircularProgressBar
-                    value={70}
-                    gaugePrimaryColor="var(--green)"
-                    gaugeSecondaryColor="var(--mint-green)"
-                    className="size-13 text-xl text-card-foreground"
-                  />
-                </CardTitle>
-                <CardDescription className="flex flex-col">
-                  <h1 className="text-card-foreground font-bold text-xl">Javascript</h1>
-                  <span className="text-card-foreground font-butter">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quia eum temporibus sapiente molestiae voluptatem quos.
-                  </span>
-                </CardDescription>
-              </CardContent>
-
-              <ShineBorder
-                shineColor={['#000000', '#ffffff', '#000000']}
-                borderWidth={1}
-                duration={10}
-              />
-            </Card>
-          </div>
-
-          <div className="flex justify-center px-8 pt-20  xl:max-w-lg">
-            <Card className="border bg-card relative overflow-hidden">
-              <CardContent className="flex flex-col gap-2 p-6">
-                <CardTitle>
-                  <AnimatedCircularProgressBar
-                    value={70}
-                    gaugePrimaryColor="var(--green)"
-                    gaugeSecondaryColor="var(--mint-green)"
-                    className="size-13 text-xl text-card-foreground"
-                  />
-                </CardTitle>
-                <CardDescription className="flex flex-col">
-                  <h1 className="text-card-foreground font-bold text-xl">Javascript</h1>
-                  <span className="text-card-foreground font-butter">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quia eum temporibus sapiente molestiae voluptatem quos.
-                  </span>
-                </CardDescription>
-              </CardContent>
-
-              <ShineBorder
-                shineColor={['#000000', '#ffffff', '#000000']}
-                borderWidth={1}
-                duration={10}
-              />
-            </Card>
-          </div>
-        </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
