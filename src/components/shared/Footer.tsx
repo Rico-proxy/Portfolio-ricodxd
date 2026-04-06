@@ -1,4 +1,4 @@
-import { CiLinkedin } from 'react-icons/ci';
+import { CiMail, CiLinkedin } from 'react-icons/ci';
 import { LuGithub } from 'react-icons/lu';
 
 const Footer = () => {
@@ -27,6 +27,12 @@ const Footer = () => {
             aria-label="GitHub profile"
             className="hover:text-secondary transition-colors">
             <LuGithub className="text-2xl md:text-3xl" />
+          </a>
+          <a
+            href="mailto:richardoahimire@gmail.com"
+            aria-label="Send email"
+            className="hover:text-secondary transition-colors">
+            <CiMail className="text-2xl md:text-3xl" />
           </a>
         </div>
       </div>

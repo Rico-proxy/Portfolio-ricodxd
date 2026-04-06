@@ -1,4 +1,4 @@
-import React, { type HTMLAttributes, useCallback, useMemo } from "react"
+import React, { type HTMLAttributes, useCallback, useEffect, useMemo, useState } from "react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -63,6 +63,27 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   gridColor = "var(--border)",
   ...props
 }) => {
+  const [useLightweightMode, setUseLightweightMode] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const mediaQuery = window.matchMedia(
+      "(max-width: 900px), (prefers-reduced-motion: reduce)"
+    )
+
+    const updateMode = () => {
+      setUseLightweightMode(mediaQuery.matches)
+    }
+
+    updateMode()
+    mediaQuery.addEventListener("change", updateMode)
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateMode)
+    }
+  }, [])
+
   const generateBeams = useCallback(() => {
     const beams = []
     const cellsPerSide = Math.floor(100 / beamSize)
@@ -83,67 +104,77 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
 
   return (
     <div className={cn("relative rounded border p-20", className)} {...props}>
-      <div
-        style={
-          {
-            "--perspective": `${perspective}px`,
-            "--grid-color": gridColor,
-            "--beam-size": `${beamSize}%`,
-          } as React.CSSProperties
-        }
-        className={
-          "[container-type:size] pointer-events-none absolute top-0 left-0 size-full overflow-hidden [clipPath:inset(0)] [perspective:var(--perspective)] [transform-style:preserve-3d]"
-        }
-      >
-        {/* top side */}
-        <div className="[container-type:inline-size] absolute z-20 [height:100cqmax] [width:100cqi] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
-          {topBeams.map((beam, index) => (
-            <Beam
-              key={`top-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-              delay={beam.delay}
-              duration={beamDuration}
-            />
-          ))}
+      {useLightweightMode ? (
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 20% 25%, rgba(134, 240, 151, 0.16), transparent 45%)",
+          }}
+        />
+      ) : (
+        <div
+          style={
+            {
+              "--perspective": `${perspective}px`,
+              "--grid-color": gridColor,
+              "--beam-size": `${beamSize}%`,
+            } as React.CSSProperties
+          }
+          className={
+            "[container-type:size] pointer-events-none absolute top-0 left-0 size-full overflow-hidden [clipPath:inset(0)] [perspective:var(--perspective)] [transform-style:preserve-3d]"
+          }
+        >
+          {/* top side */}
+          <div className="[container-type:inline-size] absolute z-20 [height:100cqmax] [width:100cqi] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
+            {topBeams.map((beam, index) => (
+              <Beam
+                key={`top-${index}`}
+                width={`${beamSize}%`}
+                x={`${beam.x * beamSize}%`}
+                delay={beam.delay}
+                duration={beamDuration}
+              />
+            ))}
+          </div>
+          {/* bottom side */}
+          <div className="[container-type:inline-size] absolute top-full [height:100cqmax] [width:100cqi] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
+            {bottomBeams.map((beam, index) => (
+              <Beam
+                key={`bottom-${index}`}
+                width={`${beamSize}%`}
+                x={`${beam.x * beamSize}%`}
+                delay={beam.delay}
+                duration={beamDuration}
+              />
+            ))}
+          </div>
+          {/* left side */}
+          <div className="[container-type:inline-size] absolute top-0 left-0 [height:100cqmax] [width:100cqh] [transform-origin:0%_0%] [transform:rotate(90deg)_rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
+            {leftBeams.map((beam, index) => (
+              <Beam
+                key={`left-${index}`}
+                width={`${beamSize}%`}
+                x={`${beam.x * beamSize}%`}
+                delay={beam.delay}
+                duration={beamDuration}
+              />
+            ))}
+          </div>
+          {/* right side */}
+          <div className="[container-type:inline-size] absolute top-0 right-0 [height:100cqmax] [width:100cqh] [transform-origin:100%_0%] [transform:rotate(-90deg)_rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
+            {rightBeams.map((beam, index) => (
+              <Beam
+                key={`right-${index}`}
+                width={`${beamSize}%`}
+                x={`${beam.x * beamSize}%`}
+                delay={beam.delay}
+                duration={beamDuration}
+              />
+            ))}
+          </div>
         </div>
-        {/* bottom side */}
-        <div className="[container-type:inline-size] absolute top-full [height:100cqmax] [width:100cqi] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
-          {bottomBeams.map((beam, index) => (
-            <Beam
-              key={`bottom-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-              delay={beam.delay}
-              duration={beamDuration}
-            />
-          ))}
-        </div>
-        {/* left side */}
-        <div className="[container-type:inline-size] absolute top-0 left-0 [height:100cqmax] [width:100cqh] [transform-origin:0%_0%] [transform:rotate(90deg)_rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
-          {leftBeams.map((beam, index) => (
-            <Beam
-              key={`left-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-              delay={beam.delay}
-              duration={beamDuration}
-            />
-          ))}
-        </div>
-        {/* right side */}
-        <div className="[container-type:inline-size] absolute top-0 right-0 [height:100cqmax] [width:100cqh] [transform-origin:100%_0%] [transform:rotate(-90deg)_rotateX(-90deg)] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]">
-          {rightBeams.map((beam, index) => (
-            <Beam
-              key={`right-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-              delay={beam.delay}
-              duration={beamDuration}
-            />
-          ))}
-        </div>
-      </div>
+      )}
       <div className="relative">{children}</div>
     </div>
   )

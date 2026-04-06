@@ -2,7 +2,7 @@
 // import logo from './logo.png';
 // Example if you ever want an svg as URL (not a React component):
 // import patternUrl from './pattern.svg?url';
-import background from './images/background4-optimized.jpg';
+import background from './images/test.jpg';
 import resourceLibrary from './images/resource-library.jpg';
 import visualDesignerPortfolio from './images/visual-designer-portfolio.jpg';
 import pizzaHub from './images/pizzahub.jpg';
