@@ -7,13 +7,14 @@ import resourceLibrary from './images/resource-library.jpg';
 import visualDesignerPortfolio from './images/visual-designer-portfolio.jpg';
 import pizzaHub from './images/pizzahub.jpg';
 import browncon from './images/browncon.jpg';
-
+import support from './images/support.png'
 export const Images = {
   background,
   resourceLibrary,
   visualDesignerPortfolio,
   pizzaHub,
   browncon,
+  support
 };
 
 export default Images;

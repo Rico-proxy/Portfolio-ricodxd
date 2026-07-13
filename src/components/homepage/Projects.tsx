@@ -28,6 +28,12 @@ const Projects = () => {
       href: 'https://browncon.vercel.app/',
       stack: ['HTML', 'Tailwind'],
     },
+    {
+      name: 'Addiction Support Website',
+      image: Images.support,
+      href: 'https://support-website-sigma.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
   ];
 
   return (
@@ -51,15 +57,15 @@ const Projects = () => {
         {projects.map((project) => (
           <div key={project.name} className="flex flex-col gap-5 xl:max-w-lg">
             <a href={project.href} target="_blank" rel="noreferrer" className="group block">
-              <Card className="bg-card p-0 overflow-hidden border-border transition-transform duration-300 group-hover:-translate-y-1">
+              <Card className="bg-card p-0 border-border overflow-hidden transition-transform group-hover:-translate-y-1 duration-300">
                 <img
                   src={project.image}
                   alt={`${project.name} screenshot`}
-                  className="w-full aspect-[4/2] object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full object-cover aspect-[4/2] group-hover:scale-105 transition-transform duration-500"
                 />
               </Card>
             </a>
-            <div className="items-center gap-3 flex flex-wrap pt-1">
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               {project.stack.map((tech) => (
                 <RainbowButton key={`${project.name}-${tech}`} variant="outline">
                   {tech}
@@ -71,7 +77,7 @@ const Projects = () => {
                 href={project.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-bold text-foreground md:text-lg hover:text-secondary transition-colors">
+                className="font-bold text-foreground hover:text-secondary md:text-lg transition-colors">
                 {project.name}
               </a>
             </div>
