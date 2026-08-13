@@ -8,13 +8,15 @@ import visualDesignerPortfolio from './images/visual-designer-portfolio.jpg';
 import pizzaHub from './images/pizzahub.jpg';
 import browncon from './images/browncon.jpg';
 import support from './images/support.png'
+import artistPortfolio from './images/artistPorfolio.png';
 export const Images = {
   background,
   resourceLibrary,
   visualDesignerPortfolio,
   pizzaHub,
   browncon,
-  support
+  support,
+  artistPortfolio,
 };
 
 export default Images;

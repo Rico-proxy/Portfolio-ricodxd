@@ -34,6 +34,12 @@ const Projects = () => {
       href: 'https://support-website-sigma.vercel.app/',
       stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
     },
+    {
+      name: 'Artist Portfolio',
+      image: Images.artistPortfolio,
+      href: 'https://artist-portfolio-sigma.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
   ];
 
   return (
