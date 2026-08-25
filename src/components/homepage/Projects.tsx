@@ -1,6 +1,7 @@
 import { Card } from '../ui/card';
 import Images from '@/assets';
 import { RainbowButton } from '../ui/rainbow-button';
+import ScrollReveal from '../ui/scroll-reveal';
 
 const Projects = () => {
   const projects = [
@@ -37,7 +38,13 @@ const Projects = () => {
     {
       name: 'Artist Portfolio',
       image: Images.artistPortfolio,
-      href: 'https://artist-portfolio-sigma.vercel.app/',
+      href: 'https://artiste-porfolio.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
+    {
+      name: 'Move Ng',
+      image: Images.moveNg,
+      href: 'https://move-ng.vercel.app/',
       stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
     },
   ];
@@ -60,35 +67,53 @@ const Projects = () => {
           <div className="border border-border border-t-2 w-16 h-px"></div>
         </div>
 
-        {projects.map((project) => (
-          <div key={project.name} className="flex flex-col gap-5 xl:max-w-lg">
-            <a href={project.href} target="_blank" rel="noreferrer" className="group block">
-              <Card className="bg-card p-0 border-border overflow-hidden transition-transform group-hover:-translate-y-1 duration-300">
-                <img
-                  src={project.image}
-                  alt={`${project.name} screenshot`}
-                  className="w-full object-cover aspect-[4/2] group-hover:scale-105 transition-transform duration-500"
-                />
-              </Card>
-            </a>
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              {project.stack.map((tech) => (
-                <RainbowButton key={`${project.name}-${tech}`} variant="outline">
-                  {tech}
-                </RainbowButton>
-              ))}
-            </div>
-            <div>
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="font-bold text-foreground hover:text-secondary md:text-lg transition-colors">
-                {project.name}
+        {projects.map((project, index) => {
+          const isLastOddProject =
+            projects.length % 2 === 1 && index === projects.length - 1;
+
+          return (
+            <ScrollReveal
+              key={project.name}
+              className={`flex flex-col gap-5 xl:max-w-lg ${
+                isLastOddProject
+                  ? 'md:col-span-2 md:justify-self-center md:w-[calc((100%_-_3rem)/2)] md:max-w-none xl:max-w-lg'
+                  : ''
+              }`}
+              initial={{
+                opacity: 0,
+                x: index % 2 === 0 ? -56 : 56,
+                filter: 'blur(8px)',
+              }}
+              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              transition={{ delay: index * 0.05 }}>
+              <a href={project.href} target="_blank" rel="noreferrer" className="group block">
+                <Card className="bg-card p-0 border-border overflow-hidden transition-transform group-hover:-translate-y-1 duration-300">
+                  <img
+                    src={project.image}
+                    alt={`${project.name} screenshot`}
+                    className="w-full object-cover aspect-[4/2] group-hover:scale-105 transition-transform duration-500"
+                  />
+                </Card>
               </a>
-            </div>
-          </div>
-        ))}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                {project.stack.map((tech) => (
+                  <RainbowButton key={`${project.name}-${tech}`} variant="outline">
+                    {tech}
+                  </RainbowButton>
+                ))}
+              </div>
+              <div>
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-bold text-foreground hover:text-secondary md:text-lg transition-colors">
+                  {project.name}
+                </a>
+              </div>
+            </ScrollReveal>
+          );
+        })}
       </div>
     </div>
   );

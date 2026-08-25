@@ -1,0 +1,209 @@
+{
+	"name": "Rain on Glass",
+	"slug": "rain-on-glass",
+	"version": 1,
+	"description": "Looking through a glass pane in the rain \u2014 droplets refract the background, slide down with gravity, and leave thin trails.",
+	"dependencies": [],
+	"authorName": "@ybouane",
+	"authorUrl": "https://x.com/ybouane",
+	"tags": [
+		"rain",
+		"droplets",
+		"refraction",
+		"glass",
+		"premium"
+	],
+	"category": "Premium",
+	"featured": true,
+	"poster": "/images/heroes/rain-on-glass.png",
+	"install": {
+		"package": "@crazygl/hero-rain-on-glass"
+	},
+	"config": {
+		"managedWidth": true,
+		"innerWidth": 1100,
+		"managedHeight": true,
+		"defaultHeight": 720,
+		"styleInheritance": "none",
+		"usesCanvas": true,
+		"usesWebGL": true,
+		"pointerTracking": true,
+		"resizeTracking": true,
+		"interactive": true,
+		"supportsImages": true,
+		"supportsFontCustomization": true,
+		"interactivityModes": [
+			"pointer",
+			"none"
+		],
+		"interactivity": "pointer"
+	},
+	"customizer": {
+		"sections": [
+			{
+				"label": "Content",
+				"fields": [
+					{
+						"id": "contentType",
+						"label": "Content Type",
+						"type": "select",
+						"default": "heading",
+						"options": [
+							{
+								"label": "Heading",
+								"value": "heading"
+							},
+							{
+								"label": "Two Columns",
+								"value": "two-columns"
+							},
+							{
+								"label": "Custom",
+								"value": "custom"
+							}
+						]
+					},
+					{
+						"id": "heading",
+						"label": "Heading",
+						"type": "text",
+						"default": "Window pane.",
+						"showWhen": {
+							"contentType": "heading"
+						}
+					},
+					{
+						"id": "subheading",
+						"label": "Subheading",
+						"type": "textarea",
+						"default": "Forty droplets sliding down a frosted glass pane, refracting whatever's behind. Faster the bigger they are.",
+						"showWhen": {
+							"contentType": "heading"
+						}
+					},
+					{
+						"id": "column1",
+						"label": "Column 1",
+						"type": "node",
+						"default": "<h2>Real droplets</h2><p>CPU sim, GLSL refraction.</p>",
+						"showWhen": {
+							"contentType": "two-columns"
+						}
+					},
+					{
+						"id": "column2",
+						"label": "Column 2",
+						"type": "node",
+						"default": "<h2>Frosted body</h2><p>Pre-blurred backdrop, sharp lens at each drop.</p>",
+						"showWhen": {
+							"contentType": "two-columns"
+						}
+					},
+					{
+						"id": "content",
+						"label": "Content",
+						"type": "node",
+						"default": "<h1>Window pane.</h1>",
+						"showWhen": {
+							"contentType": "custom"
+						}
+					}
+				]
+			},
+			{
+				"label": "Background",
+				"fields": [
+					{
+						"id": "backgroundImage",
+						"label": "Background image",
+						"type": "media",
+						"default": "https://crazygl.com/samples/nature5.avif"
+					},
+					{
+						"id": "blur",
+						"label": "Frosted blur",
+						"type": "slider",
+						"default": 14,
+						"min": 0,
+						"max": 60,
+						"step": 1,
+						"unit": "px"
+					}
+				]
+			},
+			{
+				"label": "Rain",
+				"fields": [
+					{
+						"id": "dropCount",
+						"label": "Drops",
+						"type": "slider",
+						"default": 50,
+						"min": 10,
+						"max": 150,
+						"step": 1
+					},
+					{
+						"id": "dropSize",
+						"label": "Drop size",
+						"type": "slider",
+						"default": 1,
+						"min": 0.4,
+						"max": 2.5,
+						"step": 0.05
+					},
+					{
+						"id": "fallSpeed",
+						"label": "Fall speed",
+						"type": "slider",
+						"default": 1,
+						"min": 0,
+						"max": 3,
+						"step": 0.05
+					},
+					{
+						"id": "refraction",
+						"label": "Refraction",
+						"type": "slider",
+						"default": 1,
+						"min": 0,
+						"max": 2.5,
+						"step": 0.05
+					},
+					{
+						"id": "chroma",
+						"label": "Chromatic dispersion",
+						"type": "slider",
+						"default": 1,
+						"min": 0,
+						"max": 3,
+						"step": 0.05
+					},
+					{
+						"id": "trailStrength",
+						"label": "Trail clarity",
+						"type": "slider",
+						"default": 1,
+						"min": 0,
+						"max": 2,
+						"step": 0.05
+					}
+				]
+			},
+			{
+				"label": "Typography",
+				"fields": [
+					{
+						"id": "headingFontFamily",
+						"label": "Heading Font",
+						"type": "font",
+						"default": "Inherit",
+						"showWhen": {
+							"contentType": "heading"
+						}
+					}
+				]
+			}
+		]
+	}
+}

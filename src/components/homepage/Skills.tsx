@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardTitle } from '../ui/card';
+import ScrollReveal from '../ui/scroll-reveal';
 
 type Skill = {
   name: string;
@@ -72,42 +73,50 @@ export const Skills = () => {
           <div className="border border-border border-t-2 w-16 h-px"></div>
         </div>
 
-        {frontendSkills.map((skill) => (
-          <Card
+        {frontendSkills.map((skill, index) => (
+          <ScrollReveal
             key={skill.name}
-            className="bg-card/95 shadow-black/10 shadow-lg backdrop-blur-sm border-border">
-            <CardContent className="space-y-4 p-6">
-              <div className="flex justify-between items-center gap-3">
-                <CardTitle className="font-fredoka text-card-foreground text-2xl">
-                  {skill.name}
-                </CardTitle>
-                <span className="font-semibold text-secondary text-sm">
-                  {skill.level}%
-                </span>
-              </div>
-
-              <div className="bg-muted rounded-full w-full h-2 overflow-hidden">
-                <div
-                  className="bg-gradient-to-r from-secondary to-primary rounded-full h-full transition-all duration-700"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
-
-              <CardDescription className="font-butter text-card-foreground text-base">
-                {skill.summary}
-              </CardDescription>
-
-              <div className="flex flex-wrap gap-2">
-                {skill.tools.map((tool) => (
-                  <span
-                    key={`${skill.name}-${tool}`}
-                    className="bg-background/70 px-3 py-1 border border-border rounded-full font-semibold text-foreground text-xs">
-                    {tool}
+            initial={{
+              opacity: 0,
+              x: index % 2 === 0 ? -48 : 48,
+              filter: 'blur(8px)',
+            }}
+            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            transition={{ delay: index * 0.06 }}>
+            <Card className="bg-card/95 shadow-black/10 shadow-lg backdrop-blur-sm border-border">
+              <CardContent className="space-y-4 p-6">
+                <div className="flex justify-between items-center gap-3">
+                  <CardTitle className="font-fredoka text-card-foreground text-2xl">
+                    {skill.name}
+                  </CardTitle>
+                  <span className="font-semibold text-secondary text-sm">
+                    {skill.level}%
                   </span>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                </div>
+
+                <div className="bg-muted rounded-full w-full h-2 overflow-hidden">
+                  <div
+                    className="bg-gradient-to-r from-secondary to-primary rounded-full h-full transition-all duration-700"
+                    style={{ width: `${skill.level}%` }}
+                  />
+                </div>
+
+                <CardDescription className="font-butter text-card-foreground text-base">
+                  {skill.summary}
+                </CardDescription>
+
+                <div className="flex flex-wrap gap-2">
+                  {skill.tools.map((tool) => (
+                    <span
+                      key={`${skill.name}-${tool}`}
+                      className="bg-background/70 px-3 py-1 border border-border rounded-full font-semibold text-foreground text-xs">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </ScrollReveal>
         ))}
       </div>
     </div>
