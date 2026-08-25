@@ -7,7 +7,7 @@ import {
   ScrollProgressProvider,
 } from '@/components/animate-ui/primitives/animate/scroll-progress';
 import ScrollReveal from '@/components/ui/scroll-reveal';
-import LightningStorm from '@crazygl/hero-lightning-storm';
+// import LightningStorm from '@crazygl/hero-lightning-storm';
 
 const Homepage = () => {
   return (
@@ -20,7 +20,25 @@ const Homepage = () => {
         </ScrollReveal>
       </section>
 
-      <LightningStorm
+      <section id="experience">
+        <ScrollReveal>
+          <Experience />
+        </ScrollReveal>
+      </section>
+
+      <section>
+        <ScrollReveal transition={{ delay: 0.08 }}>
+          <Skills />
+        </ScrollReveal>
+      </section>
+
+      <section id="projects">
+        <ScrollReveal transition={{ delay: 0.08 }}>
+          <Projects />
+        </ScrollReveal>
+      </section>
+
+      {/* <LightningStorm
         className="relative overflow-hidden"
         managedWidth={false}
         managedHeight={false}
@@ -61,7 +79,7 @@ const Homepage = () => {
             </div>
           </div>
         }
-      />
+      /> */}
     </ScrollProgressProvider>
   );
 };

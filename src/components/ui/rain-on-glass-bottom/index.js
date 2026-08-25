@@ -275,7 +275,7 @@ function compile(gl, t, s) {
     return sh;
 }
 function RainOnGlassHero(props) {
-    const { size, seed, reducedMotion, backgroundImage = 'https://crazygl.com/samples/nature5.avif', blur = 14, dropCount = 50, dropSize = 1, fallSpeed = 1, refraction = 1, trailStrength = 1, chroma = 1, } = props;
+    const { size, seed, reducedMotion, backgroundImage = 'https://crazygl.com/samples/nature5.avif', fallbackBackgroundImage, blur = 14, dropCount = 50, dropSize = 1, fallSpeed = 1, refraction = 1, trailStrength = 1, chroma = 1, } = props;
     const content = useContent(props);
     const [assetsReady, setAssetsReady] = React.useState(false);
     useHeroReady(props, { until: assetsReady });
@@ -352,16 +352,19 @@ function RainOnGlassHero(props) {
             const h = src.height || src.naturalHeight || 1;
             bgSizeRef.current = { w, h };
         };
-        upload(makeFallbackBG());
         if (backgroundImage) {
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = () => { if (glRef.current)
                 upload(img); setAssetsReady(true); };
-            img.onerror = () => setAssetsReady(true);
+            img.onerror = () => {
+                upload(makeFallbackBG());
+                setAssetsReady(true);
+            };
             img.src = backgroundImage;
         }
         else {
+            upload(makeFallbackBG());
             setAssetsReady(true);
         }
     }, [backgroundImage, blur]);
@@ -436,8 +439,6 @@ function RainOnGlassHero(props) {
             }
         }
         // ── Merge overlapping drops ─────────────────────────────────────
-        // Disabled locally so the hero keeps a consistent visible rain density.
-        if (false) {
         // O(n²) collision check. n ≤ 150 so ~22k pairs/frame — cheap.
         for (let i = 0; i < drops.length; i++) {
             const a = drops[i];
@@ -459,14 +460,13 @@ function RainOnGlassHero(props) {
                     small.r = 0;
                     // Respawn the absorbed drop at the top.
                     small.x = rng.range(0, 1) * w;
-                    small.y = h + 30 + rng.range(0, 100);
-                    small.r = (3 + rng.range(0, 1) * 12) * dropSize;
-                    small.vy = 0;
-                    small.tailLen = 0;
+                    small.y = h + 30 + rng.range(0, h * 0.35);
+                    small.r = (6 + rng.range(0, 1) * 10) * dropSize;
+                    small.vy = rng.range(12, 34) * dropSize;
+                    small.tailLen = rng.range(8, 40) * dropSize;
                     small.age = 0;
                 }
             }
-        }
         }
         // ── Pack uniforms (in CANVAS pixel coords, accounting for DPR) ──
         const arr = dropsBufRef.current;
@@ -499,7 +499,7 @@ function RainOnGlassHero(props) {
         gl.uniform4fv(u['u_drops[0]'], arr);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
     });
-    return (_jsxs(_Fragment, { children: [_jsx("crazygl-stage", { style: { background: '#0a1726' }, children: _jsx("canvas", { ref: canvasRef, className: "crazygl-rain-canvas", "aria-hidden": "true" }) }), _jsx("crazygl-content", { children: content.node })] }));
+    return (_jsxs(_Fragment, { children: [_jsx("crazygl-stage", { style: { backgroundImage: fallbackBackgroundImage ? `url(${fallbackBackgroundImage})` : undefined, backgroundColor: '#050807', backgroundPosition: 'bottom center', backgroundSize: 'cover' }, children: _jsx("canvas", { ref: canvasRef, className: "crazygl-rain-canvas", style: { opacity: assetsReady ? 1 : 0, transition: 'opacity 450ms ease' }, "aria-hidden": "true" }) }), _jsx("crazygl-content", { children: content.node })] }));
 }
 export default function RainOnGlass(props) {
     return _jsx(CrazyGLWrapper, { hero: RainOnGlassHero, metadata: metadata, ...props });

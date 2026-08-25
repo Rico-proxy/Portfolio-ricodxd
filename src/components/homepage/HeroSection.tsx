@@ -12,17 +12,18 @@ const HeroSection = () => {
     <RainOnGlass
       className="z-50 rounded-2xl xl:rounded-none overflow-hidden"
       backgroundImage={Images.background}
-      blur={2}
-      dropCount={130}
-      dropSize={1.05}
-      fallSpeed={0.75}
-      refraction={1.25}
-      chroma={1.15}
-      trailStrength={1.4}
+      fallbackBackgroundImage={Images.background}
+      blur={10}
+      dropCount={150}
+      dropSize={0.65}
+      fallSpeed={1.1}
+      refraction={0.75}
+      chroma={0.35}
+      trailStrength={4}
       contentType="custom"
       content={
         <div className="relative w-full overflow-hidden">
-          <div className="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+          <div className="absolute inset-0 bg-black/50" aria-hidden="true"></div>
           <div className="relative flex justify-center items-center mx-auto px-6 md:px-10 py-12 w-full max-w-4xl min-h-[420px] md:min-h-[520px] lg:min-h-[600px]">
             <div className="flex flex-col items-center gap-5 md:gap-6 w-full text-center">
               <div className="space-y-1">
