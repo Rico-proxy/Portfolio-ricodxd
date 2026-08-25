@@ -9,7 +9,7 @@ import pizzaHub from './images/pizzahub.jpg';
 import browncon from './images/browncon.jpg';
 import support from './images/support.png'
 import artistPortfolio from './images/artistPorfolio.png';
-import moveNg from './images/moveNg.png';
+import moveNg from './images/MoveNg.png';
 export const Images = {
   background,
   resourceLibrary,
