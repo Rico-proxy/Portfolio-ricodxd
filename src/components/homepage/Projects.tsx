@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { Card } from '../ui/card';
 import Images from '@/assets';
 import { RainbowButton } from '../ui/rainbow-button';
 import ScrollReveal from '../ui/scroll-reveal';
+import ProjectLightbox, { type Project } from '../shared/ProjectLightbox';
 
 const Projects = () => {
-  const projects = [
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const projects: Project[] = [
     {
       name: 'Resource Library',
       image: Images.resourceLibrary,
@@ -47,6 +51,12 @@ const Projects = () => {
       href: 'https://move-ng.vercel.app/',
       stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
     },
+    {
+      name: 'Luiggie Pizza',
+      image: Images.luiggiePizza,
+      href: 'https://luigie-pizza-3bof.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
   ];
 
   return (
@@ -86,15 +96,18 @@ const Projects = () => {
               }}
               whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               transition={{ delay: index * 0.05 }}>
-              <a href={project.href} target="_blank" rel="noreferrer" className="group block">
-                <Card className="bg-card p-0 border-border overflow-hidden transition-transform group-hover:-translate-y-1 duration-300">
+              <button
+                type="button"
+                onClick={() => setSelectedProject(project)}
+                className="group block text-left cursor-zoom-in">
+                <Card className="bg-card p-0 border-border aspect-[4/3] overflow-hidden transition-transform group-hover:-translate-y-1 duration-300">
                   <img
                     src={project.image}
                     alt={`${project.name} screenshot`}
-                    className="w-full object-cover aspect-[4/2] group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 </Card>
-              </a>
+              </button>
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 {project.stack.map((tech) => (
                   <RainbowButton key={`${project.name}-${tech}`} variant="outline">
@@ -115,6 +128,13 @@ const Projects = () => {
           );
         })}
       </div>
+
+      <ProjectLightbox
+        project={selectedProject}
+        onOpenChange={(open) => {
+          if (!open) setSelectedProject(null);
+        }}
+      />
     </div>
   );
 };
