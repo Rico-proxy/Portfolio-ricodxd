@@ -439,7 +439,11 @@ function RainOnGlassHero(props) {
             }
         }
         // ── Merge overlapping drops ─────────────────────────────────────
+        // Keep merging on wider screens, but avoid collapsing narrow mobile
+        // canvases into a few oversized drops.
+        const canMergeDrops = w >= 640;
         // O(n²) collision check. n ≤ 150 so ~22k pairs/frame — cheap.
+        if (canMergeDrops) {
         for (let i = 0; i < drops.length; i++) {
             const a = drops[i];
             if (a.r <= 0)
@@ -450,7 +454,7 @@ function RainOnGlassHero(props) {
                     continue;
                 const dx = a.x - b.x, dy = a.y - b.y;
                 const dist = Math.hypot(dx, dy);
-                if (dist < a.r + b.r) {
+                if (dist < (a.r + b.r) * 0.45) {
                     // Larger absorbs smaller.  New radius preserves area
                     // (volume per unit thickness, i.e. mass conservation).
                     const big = a.r >= b.r ? a : b;
@@ -467,6 +471,7 @@ function RainOnGlassHero(props) {
                     small.age = 0;
                 }
             }
+        }
         }
         // ── Pack uniforms (in CANVAS pixel coords, accounting for DPR) ──
         const arr = dropsBufRef.current;
