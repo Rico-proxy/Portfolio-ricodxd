@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardTitle } from '../ui/card';
+import { Progress } from '../ui/progress';
 import ScrollReveal from '../ui/scroll-reveal';
 
 type Skill = {
@@ -94,12 +95,8 @@ export const Skills = () => {
                   </span>
                 </div>
 
-                <div className="bg-muted rounded-full w-full h-2 overflow-hidden">
-                  <div
-                    className="bg-gradient-to-r from-secondary to-primary rounded-full h-full transition-all duration-700"
-                    style={{ width: `${skill.level}%` }}
-                  />
-                </div>
+              
+                <Progress value={skill.level}  />
 
                 <CardDescription className="font-butter text-card-foreground text-base">
                   {skill.summary}

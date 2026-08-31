@@ -57,6 +57,12 @@ const Projects = () => {
       href: 'https://luigie-pizza-3bof.vercel.app/',
       stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
     },
+    {
+      name: 'Verdant',
+      image: Images.plants,
+      href: 'https://plants-two-nu.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
   ];
 
   return (

@@ -11,6 +11,7 @@ import support from './images/support.png'
 import artistPortfolio from './images/artistPorfolio.png';
 import moveNg from './images/MoveNg.png';
 import luiggiePizza from './images/luiggiePizza.png';
+import plants from './images/plants.png';
 export const Images = {
   background,
   resourceLibrary,
@@ -21,6 +22,7 @@ export const Images = {
   artistPortfolio,
   moveNg,
   luiggiePizza,
+  plants,
 };
 
 export default Images;
