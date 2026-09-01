@@ -1,6 +1,7 @@
 // src/layouts/BaseLayout.tsx
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
+import ScrollToTopButton from '@/components/shared/ScrollToTopButton';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ const BaseLayout: React.FC = () => {
      <>
      <Footer/>
      </>
+     <ScrollToTopButton />
     </div>
   );
 };

@@ -215,6 +215,26 @@ html {
     font-style: normal;
     font-variation-settings: 'wdth' 100;
   }
+
+  .scroll-to-top-star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .scroll-to-top-star svg {
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--secondary) 75%, transparent));
+  }
+
+  .scroll-to-top-star:where(*) {
+    color: var(--secondary);
+  }
+
+  body:has(.scroll-to-top-star) .scroll-to-top-star {
+    pointer-events: none;
+  }
 }
 
 .dark {

@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,7 +8,7 @@ const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="relative z-50 px-4 md:px-8 py-3 md:py-4">
+    <header className="sticky top-0 z-50 border-border/60 border-b bg-background/75 px-4 md:px-8 py-3 md:py-4 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl">
         <div className="flex items-center justify-between gap-4">
           <h1 className="font-signature font-bold text-secondary text-2xl md:text-3xl xl:text-4xl">
@@ -27,14 +28,17 @@ const Navbar = () => {
             </a>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen((value) => !value)}
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMenuOpen}
-            className="md:hidden inline-flex items-center justify-center rounded-md border border-border bg-card/90 p-2 text-foreground shadow-sm">
-            {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((value) => !value)}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMenuOpen}
+              className="inline-flex items-center justify-center rounded-md border border-border bg-card/90 p-2 text-foreground shadow-sm md:hidden">
+              {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
 
         {isMenuOpen && (

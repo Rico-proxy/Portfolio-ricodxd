@@ -3,8 +3,8 @@ import { LuGithub } from 'react-icons/lu';
 
 const Footer = () => {
   return (
-    <div className="bg-primary/10 px-4 md:px-8">
-      <div className="flex flex-row justify-between p-5 text-foreground">
+    <div className="border-border border-t bg-card/80 px-4 md:px-8 dark:bg-muted/40">
+      <div className="mx-auto flex max-w-6xl flex-row justify-between p-5 text-foreground">
         <div className="">
           <h1 className="font-signature font-bold text-secondary text-xl md:text-2xl xl:text-4xl">
             Rico
