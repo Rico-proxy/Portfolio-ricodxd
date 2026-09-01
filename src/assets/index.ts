@@ -14,6 +14,7 @@ import luiggiePizza from './images/luiggiePizza.png';
 import plants from './images/plants.png';
 import amour from './images/amour.png';
 import ricoflux from './images/ricoflux.png';
+import incasa from  './images/incasa.png';
 export const Images = {
   background,
   resourceLibrary,
@@ -27,6 +28,7 @@ export const Images = {
   plants,
   amour,
   ricoflux,
+  incasa
 };
 
 export default Images;

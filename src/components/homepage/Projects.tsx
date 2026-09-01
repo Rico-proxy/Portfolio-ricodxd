@@ -75,6 +75,12 @@ const Projects = () => {
       href: 'https://anime-stream-iota-seven.vercel.app/',
       stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
     },
+    {
+      name: 'Incasa',
+      image: Images.incasa,
+      href: 'https://incasa-gray.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn'],
+    },
   ];
 
   return (
