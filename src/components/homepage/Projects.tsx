@@ -63,6 +63,18 @@ const Projects = () => {
       href: 'https://plants-two-nu.vercel.app/',
       stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
     },
+    {
+      name: 'Amour',
+      image: Images.amour,
+      href: 'https://amour-two.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
+    {
+      name: 'Ricoflux',
+      image: Images.ricoflux,
+      href: 'https://anime-stream-iota-seven.vercel.app/',
+      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
+    },
   ];
 
   return (

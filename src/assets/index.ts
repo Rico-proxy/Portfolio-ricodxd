@@ -12,6 +12,8 @@ import artistPortfolio from './images/artistPorfolio.png';
 import moveNg from './images/MoveNg.png';
 import luiggiePizza from './images/luiggiePizza.png';
 import plants from './images/plants.png';
+import amour from './images/amour.png';
+import ricoflux from './images/ricoflux.png';
 export const Images = {
   background,
   resourceLibrary,
@@ -23,6 +25,8 @@ export const Images = {
   moveNg,
   luiggiePizza,
   plants,
+  amour,
+  ricoflux,
 };
 
 export default Images;
