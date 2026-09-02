@@ -80,4 +80,10 @@ export const projects: Project[] = [
     href: 'https://incasa-gray.vercel.app/',
     stack: ['React', 'Tailwind', 'Shadcn'],
   },
+  {
+    name: 'The Merger',
+    image: Images.merger,
+    href: 'https://the-merger-ashy.vercel.app/',
+    stack: ['React Router', 'Tailwind CSS', 'Shadcn'],
+  },
 ];

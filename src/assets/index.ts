@@ -15,6 +15,7 @@ import plants from './images/plants.png';
 import amour from './images/amour.png';
 import ricoflux from './images/ricoflux.png';
 import incasa from  './images/incasa.png';
+import merger from './images/merger.png';
 export const Images = {
   background,
   resourceLibrary,
@@ -28,7 +29,8 @@ export const Images = {
   plants,
   amour,
   ricoflux,
-  incasa
+  incasa,
+  merger
 };
 
 export default Images;
