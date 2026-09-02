@@ -1,87 +1,13 @@
 import { useState } from 'react';
 import { Card } from '../ui/card';
-import Images from '@/assets';
 import { RainbowButton } from '../ui/rainbow-button';
 import ScrollReveal from '../ui/scroll-reveal';
-import ProjectLightbox, { type Project } from '../shared/ProjectLightbox';
+import ProjectLightbox from '../shared/ProjectLightbox';
+import { projects } from '@/data/projects';
+import type { Project } from '@/data/projects';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const projects: Project[] = [
-    {
-      name: 'Resource Library',
-      image: Images.resourceLibrary,
-      href: 'https://resource-library-with-superbase-aut.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn'],
-    },
-    {
-      name: 'Visual Designer Portfolio',
-      image: Images.visualDesignerPortfolio,
-      href: 'https://ui-designer-seven.vercel.app/',
-      stack: ['Next.js', 'Tailwind'],
-    },
-    {
-      name: 'Pizza Hub',
-      image: Images.pizzaHub,
-      href: 'https://luigie-pizza.vercel.app/',
-      stack: ['React', 'Tailwind'],
-    },
-    {
-      name: 'Browncon',
-      image: Images.browncon,
-      href: 'https://browncon.vercel.app/',
-      stack: ['HTML', 'Tailwind'],
-    },
-    {
-      name: 'Addiction Support Website',
-      image: Images.support,
-      href: 'https://support-website-sigma.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Artist Portfolio',
-      image: Images.artistPortfolio,
-      href: 'https://artiste-porfolio.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Move Ng',
-      image: Images.moveNg,
-      href: 'https://move-ng.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Luiggie Pizza',
-      image: Images.luiggiePizza,
-      href: 'https://luigie-pizza-3bof.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Verdant',
-      image: Images.plants,
-      href: 'https://plants-two-nu.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Amour',
-      image: Images.amour,
-      href: 'https://amour-two.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Ricoflux',
-      image: Images.ricoflux,
-      href: 'https://anime-stream-iota-seven.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn', 'Magic UI'],
-    },
-    {
-      name: 'Incasa',
-      image: Images.incasa,
-      href: 'https://incasa-gray.vercel.app/',
-      stack: ['React', 'Tailwind', 'Shadcn'],
-    },
-  ];
 
   return (
     <div className="py-20">
@@ -108,7 +34,7 @@ const Projects = () => {
           return (
             <ScrollReveal
               key={project.name}
-              className={`flex flex-col gap-5 xl:max-w-lg ${
+              className={`xl:max-w-lg ${
                 isLastOddProject
                   ? 'md:col-span-2 md:justify-self-center md:w-[calc((100%_-_3rem)/2)] md:max-w-none xl:max-w-lg'
                   : ''
@@ -120,34 +46,42 @@ const Projects = () => {
               }}
               whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               transition={{ delay: index * 0.05 }}>
-              <button
-                type="button"
-                onClick={() => setSelectedProject(project)}
-                className="group block text-left cursor-zoom-in">
-                <Card className="bg-card p-0 border-border aspect-[4/3] overflow-hidden transition-transform group-hover:-translate-y-1 duration-300">
-                  <img
-                    src={project.image}
-                    alt={`${project.name} screenshot`}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                </Card>
-              </button>
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                {project.stack.map((tech) => (
-                  <RainbowButton key={`${project.name}-${tech}`} variant="outline">
-                    {tech}
-                  </RainbowButton>
-                ))}
-              </div>
-              <div>
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-bold text-foreground hover:text-secondary md:text-lg transition-colors">
-                  {project.name}
-                </a>
-              </div>
+              <Card className="group relative overflow-hidden border-secondary/45 bg-card/95 p-5 shadow-[0_0_34px_rgba(134,240,151,0.2),inset_0_0_26px_rgba(134,240,151,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-secondary/80 hover:shadow-[0_0_44px_rgba(134,240,151,0.32),inset_0_0_32px_rgba(134,240,151,0.13)]">
+                <button
+                  type="button"
+                  onClick={() => setSelectedProject(project)}
+                  className="block w-full cursor-zoom-in overflow-hidden rounded-lg border border-border/80 bg-background text-left shadow-[0_18px_40px_rgba(0,0,0,0.16)]">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={`${project.name} screenshot`}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </button>
+
+                <div className="flex flex-col gap-5 px-1 pt-2">
+                  <div>
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-bold text-foreground hover:text-secondary text-xl md:text-2xl transition-colors">
+                      {project.name}
+                    </a>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    {project.stack.map((tech) => (
+                      <RainbowButton
+                        key={`${project.name}-${tech}`}
+                        variant="outline">
+                        {tech}
+                      </RainbowButton>
+                    ))}
+                  </div>
+                </div>
+              </Card>
             </ScrollReveal>
           );
         })}

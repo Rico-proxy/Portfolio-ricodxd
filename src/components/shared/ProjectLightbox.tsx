@@ -8,13 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../ui/dialog';
-
-export type Project = {
-  name: string;
-  image: string;
-  href: string;
-  stack: string[];
-};
+import type { Project } from '@/data/projects';
 
 type ProjectLightboxProps = {
   project: Project | null;
@@ -24,10 +18,10 @@ type ProjectLightboxProps = {
 const ProjectLightbox = ({ project, onOpenChange }: ProjectLightboxProps) => {
   return (
     <Dialog open={Boolean(project)} onOpenChange={onOpenChange}>
-      <DialogContent className="flex flex-col gap-0 p-0 w-[calc(100%-2rem)] max-w-6xl sm:max-w-6xl max-h-[92vh] overflow-hidden">
+      <DialogContent className="flex flex-col gap-0 p-0 w-[calc(100%-2rem)] max-w-6xl sm:max-w-6xl max-h-[82vh] overflow-hidden md:max-h-[92vh]">
         {project ? (
           <>
-            <DialogHeader className="px-4 md:px-6 py-4 pr-14 border-border border-b text-left">
+            <DialogHeader className="px-4 md:px-6 py-3 md:py-4 pr-14 border-border border-b text-left">
               <DialogTitle className="font-fredoka font-bold text-xl md:text-2xl">
                 {project.name}
               </DialogTitle>
@@ -53,7 +47,7 @@ const ProjectLightbox = ({ project, onOpenChange }: ProjectLightboxProps) => {
               />
             </div>
 
-            <DialogFooter className="px-4 md:px-6 py-4 border-border border-t">
+            <DialogFooter className="px-4 md:px-6 py-3 md:py-4 border-border border-t">
               <Button asChild className="bg-secondary text-black">
                 <a href={project.href} target="_blank" rel="noreferrer">
                   <ExternalLink className="size-4" />

@@ -1,3 +1,4 @@
+import Contact from '@/components/homepage/Contact';
 import Experience from '@/components/homepage/Experience';
 import HeroSection from '@/components/homepage/HeroSection';
 import Projects from '@/components/homepage/Projects';
@@ -26,7 +27,7 @@ const Homepage = () => {
         </ScrollReveal>
       </section>
 
-      <section>
+      <section id="skills">
         <ScrollReveal transition={{ delay: 0.08 }}>
           <Skills />
         </ScrollReveal>
@@ -35,6 +36,12 @@ const Homepage = () => {
       <section id="projects">
         <ScrollReveal transition={{ delay: 0.08 }}>
           <Projects />
+        </ScrollReveal>
+      </section>
+
+      <section id="contact">
+        <ScrollReveal transition={{ delay: 0.08 }}>
+          <Contact />
         </ScrollReveal>
       </section>
 
@@ -65,7 +72,7 @@ const Homepage = () => {
                 </ScrollReveal>
               </section>
 
-              <section>
+              <section id="skills">
                 <ScrollReveal transition={{ delay: 0.08 }}>
                   <Skills />
                 </ScrollReveal>
@@ -74,6 +81,12 @@ const Homepage = () => {
               <section id="projects">
                 <ScrollReveal transition={{ delay: 0.08 }}>
                   <Projects />
+                </ScrollReveal>
+              </section>
+
+              <section id="contact">
+                <ScrollReveal transition={{ delay: 0.08 }}>
+                  <Contact />
                 </ScrollReveal>
               </section>
             </div>
