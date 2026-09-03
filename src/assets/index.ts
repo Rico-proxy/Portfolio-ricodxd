@@ -16,6 +16,7 @@ import amour from './images/amour.png';
 import ricoflux from './images/ricoflux.png';
 import incasa from  './images/incasa.png';
 import merger from './images/merger.png';
+import banks from './images/banks.png';
 export const Images = {
   background,
   resourceLibrary,
@@ -30,7 +31,8 @@ export const Images = {
   amour,
   ricoflux,
   incasa,
-  merger
+  merger,
+  banks
 };
 
 export default Images;
